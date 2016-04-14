@@ -25,7 +25,7 @@ blueprint = Blueprint("modelresource", __name__, url_prefix='/api/modelresources
 
 
 
-@blueprint.route("/<int:id>/download",methods=['GET'])
+@blueprint.route("/<int:id>/download", methods=['GET'])
 def download_resource(id):
     resource = ModelResource.query.get(id)
     if resource:
@@ -33,7 +33,7 @@ def download_resource(id):
       download_url = obj.download_url()
       return redirect(download_url, code=302)
 
-@blueprint.route("/download/<string:name>",methods=['GET'])
+@blueprint.route("/download/<string:name>", methods=['GET'])
 def download_resource_by_name(name):
     resource = ModelResource.query.filter_by(resource_name=name).first()
     if resource:

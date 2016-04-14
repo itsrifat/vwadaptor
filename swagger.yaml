@@ -94,6 +94,8 @@ definitions:
         format: int64
       resource_type:
         type: string
+      resource_url:
+        type: string
 
     type: object
 
@@ -235,9 +237,7 @@ paths:
         '200':
           description: Search Modelruns
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/QueryResult'
+            $ref: '#/definitions/QueryResult'
 
     post:
       description: |

@@ -8,12 +8,9 @@ sys.path.append("/opt/vw-py")
 import os
 import logging
 import multiprocessing
-import json
-import pprint
 import importlib
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
 
 from vwadaptor.settings import DevConfig, ProdConfig
 from vwadaptor.modelrun.models import ModelRun, ModelResource, ModelProgress
@@ -23,7 +20,7 @@ from vwadaptor.constants import PROGRESS_STATES
 from pyee import EventEmitter
 
 import vwpy
-from vwpy.modelschema import  load_schemas
+from vwpy.modelschema import load_schemas
 
 def load_model_modules(modelschemas):
     model_modules={}
@@ -33,7 +30,7 @@ def load_model_modules(modelschemas):
         model_modules[modelschemas[mschema]['model']]={'module':mod,'method':getattr(mod, met)}
     return model_modules
 
-def create_resource_mapping(schema,modelrun):
+def create_resource_mapping(schema, modelrun):
     resources = session.query(ModelResource).filter_by(modelrun_id=modelrun.id).all()
     mapping={}
     input_schema = schema['resources']['inputs']
